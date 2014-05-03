@@ -5,15 +5,15 @@
 		socket.broadcast.in('room'+k).emit('start','white');
 		socket.emit('start','black');
 4.	После того, как игрок делает очередной ход, клиент передает на сервер событие «step» и координаты поля (х, у) с которого сделан ход и координаты поля (х1, у1) поля на которое сделан ход.
-socket.emit('step',x,y,x1,y1);
+                socket.emit('step',x,y,x1,y1);
 5.	Сервер, принимает координаты и передает клиенту второго игрока. 
-socket.broadcast.in('room'+k).emit('step',x,y,x1,y1);
+                socket.broadcast.in('room'+k).emit('step',x,y,x1,y1);
 6.	Клиент принимающего игрока получает событие «step» и координаты поля (х, у) с которого сделан ход и координаты поля (х1, у1) поля на которое сделан ход соперника.
-socket.on('step',function (a,b,c,d) {…});
+                socket.on('step',function (a,b,c,d) {…});
 7.	Если игрок ставит мат, то клиент передает на сервер событие «finish» без аргументов.
-socket.emit('finish');
+                socket.emit('finish');
 8.	При событии «finish» сервер пересылает клиенту проигравшего игрока событие «finish» без аргументов.
-socket.broadcast.in('room'+k).emit('finish');
+                socket.broadcast.in('room'+k).emit('finish');
 9.	Если один из игроков выходит из игры, то сервер отправляет второму клиенту событие «disconnect». Игра на этом окончена.
 
 ПРИМЕЧАНИЕ.
